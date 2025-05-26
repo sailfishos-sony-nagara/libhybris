@@ -499,6 +499,7 @@ private:
     int32_t getAttribute(hal::HWConfigId, hal::Attribute);
     void loadConfig(hal::HWConfigId);
     void loadConfigs();
+    void loadColorModes();
 
     // This may fail (and return a null pointer) if no layer with this ID exists
     // on this display

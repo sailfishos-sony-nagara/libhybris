@@ -295,6 +295,19 @@ hwc2_error_t hwc2_compat_display_validate(hwc2_compat_display_t* display,
     return static_cast<hwc2_error_t>(error);
 }
 
+hwc2_error_t hwc2_compat_display_set_color_mode(hwc2_compat_display_t* display,
+                                        int colorMode, int renderIntent)
+{
+    hal::Error error = display->self->setColorMode(
+        static_cast<hal::ColorMode>(colorMode)
+#if ANDROID_VERSION_MAJOR >= 9
+        ,
+        static_cast<hal::RenderIntent>(renderIntent)
+#endif
+    );
+    return static_cast<hwc2_error_t>(error);
+}
+
 hwc2_error_t hwc2_compat_layer_set_buffer(hwc2_compat_layer_t* layer,
                                           uint32_t slot,
                                           struct ANativeWindowBuffer* buffer,

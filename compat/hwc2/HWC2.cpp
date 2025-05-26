@@ -944,6 +944,7 @@ void Display::setConnected(bool connected) {
     if (!mIsConnected && connected) {
         mComposer.setClientTargetSlotCount(mId);
         if (mType == DisplayType::PHYSICAL) {
+            loadColorModes();
             loadConfigs();
         }
     }
@@ -994,6 +995,36 @@ void Display::loadConfigs()
 
     for (auto configId : configIds) {
         loadConfig(configId);
+    }
+}
+
+void Display::loadColorModes()
+{
+    // Load available colormodes and show them in logcat
+    ALOGV("[%" PRIu64 "] loadColorModes", mId);
+
+    std::vector<hal::ColorMode> modes;
+    auto error = getColorModes(&modes);
+    if (error != Error::NONE) {
+        ALOGE("[%" PRIu64 "] getColorModes failed: %s", mId,
+                to_string(error).c_str());
+        return;
+    }
+
+    for (auto mode: modes) {
+        ALOGV("[%" PRIu64 "] Available Color mode: %d", mId, mode);
+#if ANDROID_VERSION_MAJOR >= 9
+        std::vector<hal::RenderIntent> renderIntents;
+        error = getRenderIntents(mode, &renderIntents);
+        if (error != Error::NONE) {
+            ALOGE("[%" PRIu64 "] getRenderIntents failed for Color mode = %d: %s", mId, mode,
+                    to_string(error).c_str());
+            return;
+        }
+        for (auto intent: renderIntents) {
+            ALOGV("[%" PRIu64 "] Available combinations: Color mode = %d; Render intent = %d", mId, mode, intent);
+        }
+#endif
     }
 }
 
