@@ -81,7 +81,7 @@ HYBRIS_IMPLEMENT_FUNCTION3(hwc2, hwc2_error_t, hwc2_compat_display_validate,
                            hwc2_compat_display_t*, uint32_t*, uint32_t*);
 
 HYBRIS_IMPLEMENT_FUNCTION3(hwc2, hwc2_error_t, hwc2_compat_display_set_color_mode,
-                           hwc2_compat_display_t*, int, int);
+                           hwc2_compat_display_t*, int32_t, int32_t);
 
 HYBRIS_IMPLEMENT_FUNCTION5(hwc2, hwc2_error_t, hwc2_compat_display_present_or_validate,
                            hwc2_compat_display_t*, uint32_t*, uint32_t*,

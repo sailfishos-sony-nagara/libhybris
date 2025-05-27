@@ -752,7 +752,11 @@ Error Display::setColorMode(ColorMode mode)
 #else
 Error Display::setColorMode(ColorMode mode, RenderIntent renderIntent)
 {
+    ALOGI("setColorMode: trying %d %d", mode, renderIntent);
     auto intError = mComposer.setColorMode(mId, mode, renderIntent);
+    auto error = static_cast<Error>(intError);
+    ALOGI("setColorMode: %d %d -> %s (%d)", mode, renderIntent, to_string(error).c_str(), intError);
+
     return static_cast<Error>(intError);
 }
 #endif

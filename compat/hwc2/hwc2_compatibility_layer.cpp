@@ -296,7 +296,7 @@ hwc2_error_t hwc2_compat_display_validate(hwc2_compat_display_t* display,
 }
 
 hwc2_error_t hwc2_compat_display_set_color_mode(hwc2_compat_display_t* display,
-                                        int colorMode, int renderIntent)
+                                        int32_t colorMode, int32_t renderIntent)
 {
     hal::Error error = display->self->setColorMode(
         static_cast<hal::ColorMode>(colorMode)

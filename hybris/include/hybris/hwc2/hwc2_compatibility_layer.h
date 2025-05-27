@@ -123,7 +123,7 @@ extern "C" {
                                                  uint32_t* state);
 
     hwc2_error_t hwc2_compat_display_set_color_mode(hwc2_compat_display_t* display,
-                                            int colorMode, int renderIntent);
+                                            int32_t colorMode, int32_t renderIntent);
 
     hwc2_error_t hwc2_compat_layer_set_buffer(hwc2_compat_layer_t* layer,
                                               uint32_t slot,
